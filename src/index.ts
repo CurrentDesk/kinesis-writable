@@ -6,17 +6,17 @@ import {
 import { Kinesis } from 'aws-sdk'
 
 export interface KinesisWritableOptions {
+  debug?: boolean
   kinesis: Kinesis
   streamName: string
   partitionKey: string
 }
 
 export class KinesisWritable extends Writable {
+  private debug: boolean
   private kinesis: Kinesis
   private streamName: string
   private partitionKey: string
-
-  private debug: boolean
 
   public constructor(
     options: KinesisWritableOptions,
@@ -24,13 +24,7 @@ export class KinesisWritable extends Writable {
   ) {
     super(writableOptions)
 
-    Object.assign(this, options)
-
-    this.debug = false
-  }
-
-  enableDebug() {
-    this.debug = true
+    Object.assign(this, { debug: false }, options)
   }
 
   async _write(chunk, _encoding, next) {
