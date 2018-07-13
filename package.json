@@ -1,6 +1,6 @@
 {
   "name": "@currentdesk/kinesis-writable",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A new stream implementation for AWS Kinesis",
   "author": "The CurrentDesk Dev Team",
   "contributors": [
