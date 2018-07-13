@@ -1,6 +1,6 @@
 {
   "name": "@currentdesk/kinesis-writable",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A new stream implementation for AWS Kinesis",
   "author": "The CurrentDesk Dev Team",
   "contributors": [
@@ -23,6 +23,7 @@
     "prepublishOnly": "yarn clean && yarn build"
   },
   "devDependencies": {
+    "@types/node": "^10.5.2",
     "aws-sdk": "^2.274.1",
     "tslint": "^5.10.0",
     "tslint-config-standard": "^7.1.0",

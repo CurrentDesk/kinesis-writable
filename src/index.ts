@@ -5,16 +5,26 @@ import {
 
 import { Kinesis } from 'aws-sdk'
 
+export interface KinesisWritableOptions {
+  kinesis: Kinesis
+  streamName: string
+  partitionKey: string
+}
+
 export class KinesisWritable extends Writable {
+  private kinesis: Kinesis
+  private streamName: string
+  private partitionKey: string
+
   private debug: boolean
 
   public constructor(
-    private kinesis: Kinesis,
-    private streamName: string,
-    private partitionKey: string,
-    options: WritableOptions,
+    options: KinesisWritableOptions,
+    writableOptions?: WritableOptions,
   ) {
-    super(options)
+    super(writableOptions)
+
+    Object.assign(this, options)
 
     this.debug = false
   }
@@ -23,9 +33,9 @@ export class KinesisWritable extends Writable {
     this.debug = true
   }
 
-  async _write(chunk, encoding, next) {
+  async _write(chunk, _encoding, next) {
     if (Buffer.isBuffer(chunk)) {
-      chunk = chunk.toString(encoding)
+      chunk = chunk.toString()
     }
 
     const params = {
@@ -48,9 +58,9 @@ export class KinesisWritable extends Writable {
   }
 
   async _writev(chunks, next) {
-    const records = chunks.map(({ chunk, encoding }) => {
+    const records = chunks.map(({ chunk }) => {
       if (Buffer.isBuffer(chunk)) {
-        chunk = chunk.toString(encoding)
+        chunk = chunk.toString()
       }
 
       return {
