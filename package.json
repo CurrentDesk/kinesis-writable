@@ -1,0 +1,31 @@
+{
+  "name": "@currentdesk/kinesis-writable",
+  "version": "0.1.0",
+  "description": "A new stream implementation for AWS Kinesis",
+  "author": "The CurrentDesk Dev Team",
+  "contributors": [
+    "TJ Peden <tj.peden@currentdesk.com"
+  ],
+  "license": "MIT",
+  "private": false,
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc",
+    "build:watch": " tsc --watch",
+    "prepublishOnly": "yarn clean && yarn build"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.274.1",
+    "tslint": "^5.10.0",
+    "tslint-config-standard": "^7.1.0",
+    "typescript": "^2.9.2"
+  }
+}
